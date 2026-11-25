@@ -72,7 +72,7 @@ export async function runCli(f: Flags): Promise<number> {
     rl?.close();
     return gagal ? 1 : 0;
   }
-  console.log(dim(`RekanBot Open · ${label} · mode ${mode} · ${cwd}\nKetik pesan, /keluar untuk selesai, Ctrl+C membatalkan giliran.`));
+  console.log(dim(`RekanBot Open, ${label}, mode ${mode}, folder ${cwd}\nKetik pesan, /keluar untuk selesai, Ctrl+C membatalkan giliran.`));
   if (!interaktif) console.log(dim("(stdin bukan terminal: alat berisiko akan ditolak kecuali --yes)"));
   for (;;) {
     const baris = (await tanya(rl!, "\n> ")).trim();

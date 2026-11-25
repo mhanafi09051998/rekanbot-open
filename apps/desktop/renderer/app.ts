@@ -24,7 +24,7 @@ function render(s: UiState): void {
   $("folder").textContent = s.cwd;
   $("folder").title = s.cwd;
   const label = $("provider-label");
-  label.textContent = aktif ? `${aktif.name} · ${aktif.model}` : "Belum ada provider";
+  label.textContent = aktif ? `${aktif.name}, ${aktif.model}` : "Belum ada provider";
   label.classList.toggle("peringatan-teks", !aktif);
   const mode = $("mode-label");
   mode.textContent = { ask: "tanya dulu", "auto-edit": "edit otomatis", auto: "otomatis penuh" }[s.mode];

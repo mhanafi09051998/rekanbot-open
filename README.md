@@ -83,6 +83,7 @@ dengan kode keluar ≠ 0 dan dijalankan CI.
 - `web_fetch` memeriksa alamat hasil DNS sebelum mengambil, tetapi serangan DNS rebinding (alamat berubah di antara dua pencarian) belum ditangani.
 - Kurungan folder memeriksa symlink saat alat dipanggil; balapan symlink antara pemeriksaan dan pemakaian belum ditutup.
 - Mode *otomatis penuh* menjalankan shell tanpa tanya: pakai hanya di folder yang aman dirusak.
+- Installer belum ditandatangani kode. Windows 11 dengan *Smart App Control* aktif dapat memblokir aplikasinya ("An Application Control policy has blocked this file"): satu build uji di mesin pengembang diblokir, build sebelumnya tidak. Solusi tuntas: tanda tangan Authenticode.
 - Alat MCP selalu diperlakukan berisiko (minta izin) karena efeknya tidak diketahui.
 - `bash` memakai PowerShell di Windows dan bash di sistem lain; perintah tidak dijalankan di sandbox OS.
 

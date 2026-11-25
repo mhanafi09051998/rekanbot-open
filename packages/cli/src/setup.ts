@@ -54,7 +54,7 @@ export function resolveProvider(f: Flags): Resolved {
     throw new Error("Belum ada provider. Set ANTHROPIC_API_KEY/OPENAI_API_KEY, atau: rekanbot config add-provider ... atau rekanbot login claude|codex");
   }
   if (f.model) cfg = { ...cfg, model: f.model };
-  return { provider: createProvider(cfg, store), model: cfg.model, label: `${cfg.name} · ${cfg.model}`, config };
+  return { provider: createProvider(cfg, store), model: cfg.model, label: `${cfg.name}, ${cfg.model}`, config };
 }
 
 export function resolveMode(f: Flags, config: AppConfig): PermissionMode {

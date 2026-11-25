@@ -60,7 +60,7 @@ export class SettingsDialog {
           el("div", { class: "baris" },
             el("label", { class: "pilih" },
               el("input", { type: "radio", name: "aktif", checked: p.id === s.active, onchange: () => void this.jalankan(() => this.api.setActive(p.id)) }),
-              el("span", {}, el("strong", {}, p.name), el("small", {}, ` ${p.kind} · ${p.model}${p.hasKey ? " · kunci tersimpan" : ""}`)),
+              el("span", {}, el("strong", {}, p.name), el("small", {}, ` ${p.kind}, ${p.model}${p.hasKey ? ", kunci tersimpan" : ""}`)),
             ),
             el("button", { class: "btn kecil", onclick: () => void this.jalankan(() => this.api.removeProvider(p.id)) }, "Hapus"),
           ),
@@ -94,7 +94,7 @@ export class SettingsDialog {
   private bagianLogin(s: UiState): HTMLElement {
     const baris = (k: "claude" | "codex", judul: string): HTMLElement =>
       el("div", { class: "baris" },
-        el("span", {}, el("strong", {}, judul), el("small", {}, s.oauth[k] ? " · sudah login" : " · belum login")),
+        el("span", {}, el("strong", {}, judul), el("small", {}, s.oauth[k] ? ", sudah login" : ", belum login")),
         s.oauth[k]
           ? el("button", { class: "btn kecil", onclick: () => void this.jalankan(() => this.api.logout(k), "Token dihapus.") }, "Keluar")
           : el("button", { class: "btn kecil", onclick: () => void this.jalankan(() => this.api.login(k), "Login berhasil.") }, "Login via browser"),
