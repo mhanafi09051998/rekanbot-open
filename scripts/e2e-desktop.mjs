@@ -9,7 +9,9 @@ import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const electronExe = createRequire(import.meta.url)("electron");
+// REKANBOT_EXE: jalankan aplikasi hasil pasang (installer) alih-alih Electron + sumber.
+const exeTerpasang = process.env.REKANBOT_EXE;
+const electronExe = exeTerpasang ?? createRequire(import.meta.url)("electron");
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const gagal = [];
 const cek = (ok, nama, rinci = "") => {
@@ -50,7 +52,8 @@ const userData = realpathSync(mkdtempSync(join(tmpdir(), "rb-ud-")));
 const kerja = realpathSync(mkdtempSync(join(tmpdir(), "rb-kerja-")));
 writeFileSync(join(userData, "ui.json"), JSON.stringify({ cwd: kerja }));
 const port = 9300 + Math.floor(Math.random() * 400);
-const app = spawn(electronExe, [join(root, "apps/desktop"), `--remote-debugging-port=${port}`, `--user-data-dir=${userData}`], { stdio: ["ignore", "pipe", "pipe"] });
+const argsApp = [...(exeTerpasang ? [] : [join(root, "apps/desktop")]), `--remote-debugging-port=${port}`, `--user-data-dir=${userData}`];
+const app = spawn(electronExe, argsApp, { stdio: ["ignore", "pipe", "pipe"] });
 let logApp = "";
 app.stdout.on("data", (d) => (logApp += d));
 app.stderr.on("data", (d) => (logApp += d));

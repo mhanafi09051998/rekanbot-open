@@ -10,7 +10,7 @@
   "scripts": {
     "build": "node build.mjs",
     "start": "npm run build && electron .",
-    "dist": "npm run build && electron-builder --win nsis --publish never"
+    "dist": "node ../../scripts/build-installer.mjs"
   },
   "devDependencies": {
     "@rekanbot/core": "0.1.0",
@@ -20,22 +20,44 @@
   "build": {
     "appId": "my.id.rekanbot.open",
     "productName": "RekanBot",
-    "directories": { "output": "release", "buildResources": "build" },
-    "files": ["dist/**/*", "package.json"],
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
     "asar": true,
     "win": {
-      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "target": [
+        {
+          "target": "msi",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
       "icon": "build/icon.ico",
       "signAndEditExecutable": false
     },
-    "nsis": {
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.developer-tools"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Development"
+    },
+    "msi": {
       "oneClick": false,
       "perMachine": false,
-      "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
-      "artifactName": "RekanBot-Setup-${version}.${ext}"
-    },
-    "mac": { "target": "dmg", "category": "public.app-category.developer-tools" },
-    "linux": { "target": ["AppImage"], "category": "Development" }
+      "createStartMenuShortcut": true,
+      "runAfterFinish": false,
+      "warningsAsErrors": false
+    }
   }
 }

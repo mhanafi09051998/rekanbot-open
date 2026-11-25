@@ -20,24 +20,17 @@ jobs:
       - run: npm ci
       - name: Verifikasi (baris, rahasia, tipe, tes)
         run: npm run verify
-      - name: Bangun installer Windows (NSIS)
+      - name: Bangun installer Windows (MSI) + checksum
         run: npm run dist -w @rekanbot/desktop
-      - name: Hitung checksum
-        shell: pwsh
-        run: |
-          Get-ChildItem apps/desktop/release/*.exe | ForEach-Object {
-            $h = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower()
-            "$h  $($_.Name)" | Out-File -Encoding ascii "$($_.FullName).sha256"
-          }
       - uses: actions/upload-artifact@v4
         with:
           name: installer-windows
           path: |
-            apps/desktop/release/*.exe
+            apps/desktop/release/*.msi
             apps/desktop/release/*.sha256
       - name: Rilis (hanya untuk tag)
         if: startsWith(github.ref, 'refs/tags/v')
         shell: pwsh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create "${{ github.ref_name }}" apps/desktop/release/*.exe apps/desktop/release/*.sha256 --title "RekanBot ${{ github.ref_name }}" --generate-notes
+        run: gh release create "${{ github.ref_name }}" apps/desktop/release/*.msi apps/desktop/release/*.sha256 --title "RekanBot ${{ github.ref_name }}" --generate-notes

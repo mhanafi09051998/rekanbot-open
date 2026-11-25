@@ -9,7 +9,7 @@ Agen AI coding **open source**, ringan, bebas provider. Aplikasi desktop dengan 
 
 ## Pasang
 
-Unduh `RekanBot-Setup-<versi>.exe` dari halaman Releases, cek `.sha256`-nya, lalu jalankan.
+Unduh `RekanBot-<versi>.msi` dari halaman Releases, cocokkan `.sha256`-nya, lalu jalankan (per-pengguna, tanpa admin). Installer belum ditandatangani kode, jadi SmartScreen dapat memperingatkan.
 Pengembangan: Node 22+.
 
 ```
@@ -17,6 +17,7 @@ npm install
 npm run verify          # baris ≤300, rahasia, tipe, 51+ tes
 npm run build           # core + CLI + desktop
 npm start -w @rekanbot/desktop
+npm run dist -w @rekanbot/desktop   # bangun installer MSI + checksum
 ```
 
 ## Pakai
@@ -57,7 +58,8 @@ dengan kode keluar ≠ 0 dan dijalankan CI.
 | CLI | 5 tes proses nyata melawan server tiruan |
 | Desktop | 19 pemeriksaan e2e dengan Electron nyata (kunci terenkripsi, dialog izin, tulis/tolak) |
 | OAuth Claude/Codex | Alur dan pertukaran token teruji dengan token endpoint tiruan; **belum** dengan akun nyata |
-| Installer NSIS | Dibangun oleh CI (`.github/workflows/build.yml`); belum pernah dijalankan |
+| Installer MSI | Dipasang, dijalankan lewat e2e (19 lulus), lalu dicopot bersih di Windows 10.0.26300. Target NSIS **tidak dipakai**: pemasangnya crash di `System.dll` pada build Windows itu |
+| CI GitHub Actions | `ci.yml`/`build.yml` ada, tetapi belum pernah berjalan: akun pemilik terkunci karena penagihan. Installer dibangun lokal dengan `npm run dist` |
 | macOS/Linux | Kode lintas platform, **belum** diuji |
 
 ## Batasan yang diketahui
