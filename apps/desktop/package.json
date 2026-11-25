@@ -1,0 +1,41 @@
+{
+  "name": "@rekanbot/desktop",
+  "version": "0.1.0",
+  "description": "RekanBot Open: agen coding desktop ringan dan bebas provider",
+  "author": "RekanBot Open contributors",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "main": "dist/main.cjs",
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "npm run build && electron .",
+    "dist": "npm run build && electron-builder --win nsis --publish never"
+  },
+  "devDependencies": {
+    "@rekanbot/core": "0.1.0",
+    "electron": "33.4.11",
+    "electron-builder": "25.1.8"
+  },
+  "build": {
+    "appId": "my.id.rekanbot.open",
+    "productName": "RekanBot",
+    "directories": { "output": "release", "buildResources": "build" },
+    "files": ["dist/**/*", "package.json"],
+    "asar": true,
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "build/icon.ico",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "artifactName": "RekanBot-Setup-${version}.${ext}"
+    },
+    "mac": { "target": "dmg", "category": "public.app-category.developer-tools" },
+    "linux": { "target": ["AppImage"], "category": "Development" }
+  }
+}

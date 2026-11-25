@@ -1,0 +1,21 @@
+{
+  "name": "rekanbot-open",
+  "version": "0.1.0",
+  "private": true,
+  "description": "RekanBot Open: agen AI coding desktop open source, ringan dan bebas provider.",
+  "license": "MIT",
+  "type": "module",
+  "workspaces": ["packages/*", "apps/*"],
+  "scripts": {
+    "check": "node scripts/check-lines.mjs && node scripts/check-secrets.mjs",
+    "typecheck": "tsc -p packages/core && tsc -p packages/cli && tsc -p apps/desktop/electron && tsc -p apps/desktop/renderer",
+    "build": "npm run build -w @rekanbot/core && npm run build -w @rekanbot/cli && npm run build -w @rekanbot/desktop",
+    "test": "npm run build -w @rekanbot/core && node --test packages/core/test/ packages/cli/test/",
+    "verify": "npm run check && npm run typecheck && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.0"
+  }
+}

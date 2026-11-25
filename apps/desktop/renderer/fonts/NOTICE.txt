@@ -1,0 +1,3 @@
+Geist dan Geist Mono (c) Vercel, dilisensikan di bawah SIL Open Font License 1.1.
+Teks lisensi dan sumber: https://github.com/vercel/geist-font
+Berkas woff2 di folder ini adalah subset latin dari Google Fonts, dipakai tanpa perubahan.

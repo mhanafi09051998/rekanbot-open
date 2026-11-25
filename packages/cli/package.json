@@ -1,0 +1,9 @@
+{
+  "name": "@rekanbot/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": { "rekanbot": "dist/main.js" },
+  "scripts": { "build": "tsc -p ." },
+  "dependencies": { "@rekanbot/core": "0.1.0" },
+  "license": "MIT"
+}
