@@ -7,6 +7,22 @@ Agen AI coding **open source**, ringan, bebas provider. Aplikasi desktop dengan 
 - **Alat sungguhan:** baca, tulis, edit, cari (glob/grep), shell, web, daftar tugas, sub-agen baca-saja, dan klien MCP (stdio + HTTP).
 - **Aman secara bawaan:** semua jalur dikurung di folder kerja (termasuk symlink), tulis/shell/web minta izin, kunci disimpan terenkripsi OS, web fetch menolak alamat privat.
 
+## Pratinjau
+
+Panel desktop: agen membaca berkas, memperbarui daftar tugas, mengedit, lalu menjalankan tes sebagai bukti.
+
+![Percakapan: alat tampil sebagai kartu, jawaban berformat, daftar tugas di bawah](docs/preview/obrolan.png)
+
+Perintah shell selalu minta izin (mode *edit otomatis* hanya mengizinkan tulis berkas tanpa tanya):
+
+![Dialog izin untuk menjalankan perintah, dengan tombol Tolak dan Izinkan](docs/preview/izin.png)
+
+Provider, mode izin, dan login langganan diatur dari satu dialog; kunci API disimpan terenkripsi oleh OS:
+
+![Pengaturan: daftar provider, tambah provider, login eksperimental, mode izin](docs/preview/pengaturan.png)
+
+Gambar dihasilkan oleh `node scripts/capture-preview.mjs` dari aplikasi sungguhan dengan server model tiruan (skenario tetap), bukan mockup.
+
 ## Pasang
 
 Unduh `RekanBot-<versi>.msi` dari halaman Releases, cocokkan `.sha256`-nya, lalu jalankan (per-pengguna, tanpa admin). Installer belum ditandatangani kode, jadi SmartScreen dapat memperingatkan.
